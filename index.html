@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loaning.ai - 클로징 데이 송금 사기 예방 가이드</title>
+    <title>Loaning.ai - 내집 마련 모기지 가이드</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 1. 기본 설정 및 브랜드 컬러 정의 */
@@ -12,6 +12,7 @@
             --brand-hover: #008f5b;
             --text-color: #333;
             --bg-color: #f8f9fa;
+            --blue-box-bg: #eaf4fc;
         }
 
         * {
@@ -25,6 +26,8 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.7;
+            /* 전체 글씨 두께를 보통으로 설정 */
+            font-weight: 400; 
         }
 
         /* 2. 네비게이션 바 */
@@ -46,7 +49,6 @@
             align-items: center;
         }
 
-        /* CSS로 구현한 로고 */
         .logo-wrapper {
             display: flex;
             align-items: center;
@@ -62,7 +64,7 @@
 
         .logo-text {
             font-size: 26px;
-            font-weight: 800;
+            font-weight: 400; /* 볼드 제거 */
             color: #2c3e50;
             letter-spacing: -0.5px;
             line-height: 1;
@@ -81,9 +83,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             position: relative;
-            
-            /* 입력창 아래 텍스트가 안 보이도록 높이 조절 */
-            max-height: 1250px; 
+            max-height: 1800px; 
             overflow: hidden; 
             transition: max-height 0.8s ease-in-out;
         }
@@ -94,14 +94,14 @@
             padding: 6px 12px;
             border-radius: 4px;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 400; /* 볼드 제거 */
             display: inline-block;
             margin-bottom: 15px;
         }
 
         h1 {
             font-size: 30px;
-            font-weight: 700;
+            font-weight: 400; /* 볼드 제거 */
             line-height: 1.4;
             margin-bottom: 20px;
             word-break: keep-all;
@@ -119,23 +119,14 @@
             padding-bottom: 20px;
         }
 
-        /* 4. 콘텐츠 게이트 (잠금 화면) */
-        .content-gate-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, #ffffff 60%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding-bottom: 60px;
-            z-index: 10;
+        /* 애니메이션: 둥둥 떠있는 느낌 */
+        @keyframes gentle-float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
         }
 
-        /* [수정] 본문 중간 입력 박스 스타일 */
+        /* 입력 박스 스타일 */
         .welcome-box {
             background: white;
             border: 2px solid var(--brand-color);
@@ -143,22 +134,13 @@
             padding: 30px; 
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 168, 107, 0.15);
-            margin: 30px 0;
-            
-            /* [중요] 부드러운 움직임을 위한 트랜지션 추가 */
-            transition: transform 0.1s ease-out, box-shadow 0.3s ease;
-            /* 초기 상태: 변형 없음 */
-            transform: perspective(1000px) rotateX(0) rotateY(0);
-        }
-
-        /* 마우스를 올렸을 때 살짝 떠오르는 효과 추가 */
-        .welcome-box:hover {
-            box-shadow: 0 15px 40px rgba(0, 168, 107, 0.2);
+            margin: 50px 0 20px 0;
+            animation: gentle-float 3s ease-in-out infinite;
         }
 
         .welcome-title {
             font-size: 24px;
-            font-weight: 800;
+            font-weight: 400; /* 볼드 제거 */
             color: #222;
             margin-bottom: 10px;
             display: flex;
@@ -200,7 +182,7 @@
             border: none;
             padding: 0 24px;
             border-radius: 8px;
-            font-weight: 700;
+            font-weight: 400; /* 볼드 제거 */
             font-size: 15px;
             cursor: pointer;
             transition: background-color 0.2s;
@@ -211,37 +193,89 @@
             background-color: var(--brand-hover);
         }
 
-        .summary-box {
-            background-color: #f4fcf8;
+        /* 섹션 제목 */
+        h2 {
+            font-size: 22px;
+            font-weight: 400; /* 볼드 제거 */
+            color: #222;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        /* 파란색 박스 */
+        .blue-info-box {
+            background-color: var(--blue-box-bg);
             padding: 25px;
             border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid #dff2e9;
-        }
-        
-        .summary-title {
-            font-weight: 800;
-            margin-bottom: 15px;
-            display: block;
-            color: #2c3e50;
-        }
-
-        .summary-list {
-            list-style-type: disc;
-            padding-left: 20px;
-            margin: 0;
-        }
-
-        .summary-list li {
-            margin-bottom: 10px;
-            font-size: 15px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .summary-list li strong {
+            margin: 30px 0;
+            font-size: 16px;
             color: #333;
-            font-weight: 700;
+            line-height: 1.8;
+        }
+
+        /* 체크리스트 섹션 스타일 (수정됨) */
+        .checklist-title {
+            font-size: 20px;
+            font-weight: 400; /* 볼드 제거 */
+            margin-top: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #444;
+            cursor: pointer; /* 클릭 가능 표시 */
+        }
+
+        /* 실제 체크박스 스타일링 */
+        .real-checkbox {
+            appearance: none; /* 기본 스타일 제거 */
+            min-width: 20px;
+            height: 20px;
+            border: 2px solid #555;
+            border-radius: 3px;
+            margin-top: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+
+        /* 체크되었을 때 스타일 */
+        .real-checkbox:checked {
+            background-color: var(--brand-color);
+            border-color: var(--brand-color);
+        }
+
+        /* 체크 표시 (V) 만들기 */
+        .real-checkbox:checked::after {
+            content: '\2714'; /* 체크 문자 */
+            font-size: 14px;
+            color: white;
+        }
+
+        /* 4. 콘텐츠 게이트 (하단 가림막) */
+        .content-gate-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px; 
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 40%, #ffffff 80%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 60px;
+            z-index: 10;
         }
 
         .unlocked {
@@ -285,23 +319,43 @@
         </div>
 
         <div class="content">
-            <div class="summary-box">
-                <span class="summary-title">📝 Offer Accepted 3줄 요약</span>
-                <ul class="summary-list">
-                    <li>Loaning.ai는 계약서 리뷰 서비스를 무료로 제공해 드리고 있습니다.</li>
-                    <li>부동산 계약 체결 후, 3일(Business Days) 내 EMD(계약금)을 송금해 주세요.</li>
-                    <li>다음 Loan Application에 필요한 서류를 준비해 주시고, 자금 출처를 관리해 주세요.</li>
-                </ul>
+            
+            <h2>들어가며</h2>
+            <p>
+                미국의 낯선 모기지 절차, 어떤 서류를 언제까지 준비해야 할지 막막하신가요?
+            </p>
+            <p>
+                한국과 달리, 복잡한 금융 용어와 산더미 같은 요청 서류들. 
+                기한을 놓치면 클로징이 미뤄질 수 있다는 압박감에 혼자서 정보를 찾고 판단한다는 건 너무나 버거운 일입니다.
+            </p>
+
+            <div class="blue-info-box">
+                <p>
+                    Loaning.ai는 이러한 불편함을 해결하기 위해 &lt;내집 마련 모기지 가이드&gt;를 준비했습니다. 계약 체결, 3단계의 Disclosure, 그리고 클로징까지 이어지는 모기지 프로세스를 한 권에 담았어요.
+                </p>
+                <p style="margin-top: 15px;">
+                    AI 기반 구조화·자동화 시스템을 통해, 일반적인 클로징 기간을 70% 단축시킨 Loaning.ai의 안전하고 신속한 모기지 솔루션을 만나 보세요.
+                </p>
             </div>
 
-            <p>
-                Offer Accepted(오퍼 수락) 이후 <strong>딱 3일(Business Days)</strong>. 이 3일의 골든타임 안에 반드시 처리해야 할 과제들이 있습니다.
-            </p>
-            <p>
-                만약 이 타이밍을 놓치거나 실수를 하면, 어렵게 잡은 계약이 취소되는 것은 물론 소중한 자금까지 잃을 수 있어요. 안전한 클로징 여정을 위해, 바이어가 반드시 해야 할 일들을 단계별로 정리해 드립니다.
-            </p>
+            <div class="checklist-title">
+                💡 이 가이드는 이런 분을 위해 만들어졌어요
+            </div>
+            
+            <label class="checklist-item">
+                <input type="checkbox" class="real-checkbox">
+                <div>집을 계약했는데, 모기지 진행 현황을 알 수 없어 불안하신 분</div>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" class="real-checkbox">
+                <div>모기지 절차가 낯설어 어떤 서류를 언제까지 준비해야 할지 막막하신 분</div>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" class="real-checkbox">
+                <div>대출 금액이 크지 않더라도 내 상황을 끝까지 챙겨 주는 파트너가 필요하신 분</div>
+            </label>
 
-            <div class="welcome-box" id="movingBox">
+            <div class="welcome-box">
                 <div class="welcome-title">
                     <i class="fas fa-lock"></i> 환영해요
                 </div>
@@ -314,31 +368,16 @@
                     <button type="submit" class="subscribe-btn">가이드 보기</button>
                 </form>
             </div>
-
-            <hr style="border:0; border-top:1px solid #eee; margin: 30px 0;">
             
-            <h3>1. 계약서(Purchase Agreement) 리뷰 신청하기</h3>
-            <p>
-                오퍼가 수락되면 가장 먼저 리스팅 에이전트로부터 최종 서명된 계약서를 받게 됩니다. 
-                이때 중요한 것은 계약서에 명시된 'Contingency(조건부 조항)'들의 기한을 확인하는 것입니다. 
-                Loaning.ai의 전문가가 고객님의 계약서를 무료로 검토해 드리고 중요한 일정들을 체크해 드립니다.
-            </p>
-
-            <h3>2. EMD(Earnest Money Deposit, 계약금) 송금</h3>
-            <p>
-                일반적으로 계약 체결 후 3 영업일(Business Days) 이내에 지정된 에스크로(Escrow) 회사로 계약금을 송금해야 합니다. 
-                이 기한을 지키지 못하면 계약 위반(Breach of Contract)이 될 수 있으니 주의하세요.
-            </p>
-            
-            <h3>3. 대출 신청(Loan Application) 준비</h3>
-            <p>
-                이제 본격적인 대출 승인 절차가 시작됩니다. 렌더(Lender)가 요구하는 최신 소득 증빙 서류, 자산 증빙 서류 등을 빠짐없이 준비해야 합니다. 
-                특히 계약금 송금 내역과 잔고 증명서(Bank Statement)의 자금 출처를 명확히 하는 것이 중요합니다.
-            </p>
-
-            <div style="background-color: #00a86b; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-top: 40px; cursor: pointer;">
-                📘 E-mail 입력 후 E-book 받아 보기
+            <div style="opacity: 0.3; margin-top: 50px;">
+                <hr style="border:0; border-top:1px solid #eee; margin: 30px 0;">
+                <h3>Chapter 1. 모기지 프로세스 A to Z</h3>
+                <p>
+                    미국에서 집을 살 때 가장 먼저 해야 할 일은 무엇일까요? 바로 'Pre-Approval Letter'를 받는 것입니다. 
+                    많은 분들이 집을 먼저 보고 대출을 알아보지만, 실제로는 대출 가능 금액을 먼저 확인해야 예산에 맞는 집을 효율적으로 찾을 수 있습니다.
+                </p>
             </div>
+
         </div>
 
         <div class="content-gate-overlay" id="gateOverlay">
@@ -347,7 +386,6 @@
     </main>
 
     <script>
-        // 1. 잠금 해제 기능
         function unlockArticle(e) {
             e.preventDefault();
 
@@ -364,7 +402,7 @@
                 method: "POST",
                 body: JSON.stringify({
                     email: emailValue,
-                    source: "Loaning_Offer_Accepted_Guide"
+                    source: "Loaning_Mortgage_Guide_Intro"
                 }),
                 headers: {
                     'Accept': 'application/json',
@@ -390,19 +428,6 @@
                 btn.disabled = false;
             });
         }
-
-        // 2. [추가] 마우스 움직임에 따라 박스가 살짝 움직이는 기능 (Parallax Effect)
-        document.addEventListener('mousemove', (e) => {
-            const box = document.getElementById('movingBox');
-            if (!box) return;
-
-            // 마우스 위치에 따라 -5px ~ 5px 범위 내에서 움직임 계산
-            const moveX = (e.clientX / window.innerWidth - 0.5) * 10;
-            const moveY = (e.clientY / window.innerHeight - 0.5) * 10;
-
-            // 박스에 transform 적용 (아주 미세하게 움직임)
-            box.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
     </script>
 
 </body>
