@@ -1,72 +1,343 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loaning.ai - 아티클 읽기</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loaning.ai Blog - 팀원을 움직이는 피드백의 과학</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 1. 기본 설정 및 브랜드 컬러 정의 */
+        :root {
+            --brand-color: #00a86b; /* Loaning.ai Green */
+            --brand-hover: #008f5b;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        /* 2. 네비게이션 바 */
+        header {
+            background: white;
+            border-bottom: 1px solid #e1e1e1;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--brand-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .nav-menu span { cursor: pointer; }
+        .nav-menu span:hover { color: var(--brand-color); }
+
+        /* 3. 아티클 레이아웃 */
+        .article-container {
+            max-width: 720px;
+            margin: 40px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: relative;
+            
+            /* 핵심: 콘텐츠 게이트를 위한 높이 제한 */
+            max-height: 850px; 
+            overflow: hidden; 
+            transition: max-height 0.8s ease-in-out; /* 부드러운 펼침 효과 */
+        }
+
+        /* 아티클 헤더 */
+        .badge {
+            background-color: #e6f7f1;
+            color: var(--brand-color);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .meta-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .author-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+
+        /* 본문 텍스트 */
+        .content p {
+            margin-bottom: 24px;
+            font-size: 17px;
+            color: #444;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 50%, #e6f7f1 50%);
+            font-weight: 600;
+        }
+
+        /* 4. 콘텐츠 게이트 (잠금 화면) 디자인 */
+        .content-gate-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 500px; /* 그라데이션 높이 */
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 20%, #ffffff 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 60px;
+            z-index: 10;
+        }
+
+        .gate-card {
+            background: white;
+            border: 2px solid var(--brand-color);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 168, 107, 0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .gate-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .gate-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* 이메일 입력 폼 */
+        .subscribe-form {
+            display: flex;
+            gap: 8px;
+        }
+
+        .subscribe-input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .subscribe-input:focus {
+            border-color: var(--brand-color);
+        }
+
+        .subscribe-btn {
+            background-color: var(--brand-color);
+            color: white;
+            border: none;
+            padding: 0 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .subscribe-btn:hover {
+            background-color: var(--brand-hover);
+        }
+
+        /* 잠금 해제 시 적용될 클래스 */
+        .unlocked {
+            max-height: 3000px !important; /* 충분히 큰 높이로 변경 */
+            mask-image: none !important;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .article-container { padding: 30px 20px; }
+            h1 { font-size: 24px; }
+            .subscribe-form { flex-direction: column; }
+            .subscribe-btn { padding: 14px; width: 100%; }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <i class="fa-solid fa-leaf"></i>
-      Loaning.ai
-    </div>
-    <nav aria-label="주요">
-      <a href="/">홈</a>
-      <a href="/articles">아티클</a>
-    </nav>
-  </header>
 
-  <main>
-    <article class="article-wrapper" id="articleWrapper">
-      <div class="article-header">
-        <img src="https://picsum.photos/1200/400" alt="아티클 대표 이미지" />
-        <h1 id="articleTitle">데모 아티클 제목 — 콘텐츠 일부를 가리고 이메일을 요청하는 게이트</h1>
-        <div class="author-info">작성자: Loaning.ai • 2025-12-14</div>
-      </div>
-
-      <div class="content-body" id="contentBody" tabindex="-1" aria-live="polite">
-        <p>이 곳은 아티클의 첫 부분입니다. 게이트는 본문 하단에 반투명 오버레이로 표시되어 남은 내용을 숨깁니다.</p>
-        <p>이 예제에서는 이메일을 입력하면 본문 전체를 부드럽게 노출합니다. 실제 서비스에서는 백엔드(예: Mailchimp, SendGrid 등)에 가입 요청을 보낼 수 있습니다.</p>
-        <p>여기에 더 많은 샘플 텍스트가 들어갑니다. 아래 버튼을 통해 게이트를 해제해보세요.</p>
-
-        <h2>추가 섹션</h2>
-        <p>게이트가 해제되면 이 섹션을 포함한 전체 본문이 보입니다. 접근성 측면에서 포커스를 안전하게 이동시켰습니다.</p>
-        <p>더 많은 본문...</p>
-        <p>끝.</p>
-      </div>
-
-      <!-- 콘텐츠 게이트 (JS 컨트롤) -->
-      <div class="content-gate" id="contentGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle" aria-describedby="gateDesc">
-        <div class="gate-box" role="group" aria-label="콘텐츠 잠금 해제">
-          <div class="gate-title" id="gateTitle">계속 읽으려면 이메일을 입력하세요</div>
-          <div class="gate-desc" id="gateDesc">최신 글 알림과 요약을 정기적으로 보내드려요. 언제든 구독 해지 가능합니다.</div>
-
-          <form id="gateForm" novalidate>
-            <label for="emailInput" class="visually-hidden">이메일 주소</label>
-            <input id="emailInput" name="email" type="email" inputmode="email" placeholder="you@domain.com" required aria-required="true" />
-            <div class="form-row">
-              <button type="submit" id="submitBtn" class="btn-primary">이메일로 구독하고 계속 읽기</button>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-home"></i> Loaning.ai
+            </a>
+            <div class="nav-menu">
+                <span>서비스 소개</span>
+                <span>블로그</span>
+                <span style="color:var(--brand-color); font-weight:bold;">로그인</span>
             </div>
-            <p class="error-message" id="errorMessage" aria-live="assertive"></p>
-            <p class="small-muted">우리는 스팸을 보내지 않습니다. 개인정보취급방침을 확인하세요.</p>
-          </form>
         </div>
-      </div>
+    </header>
 
-      <noscript>
-        <style>
-          /* 자바스크립트가 없을 때는 게이트를 숨기고 전체 내용을 보여줍니다(검색엔진/접근성 보장) */
-          .content-gate { display: none !important; }
-          .article-wrapper { max-height: none !important; overflow: visible !important; }
-        </style>
-        <p class="small-muted">브라우저에서 자바스크립트가 비활성화되어 있으므로 전체 본문을 표시합니다.</p>
-      </noscript>
-    </article>
-  </main>
+    <main class="article-container" id="mainArticle">
+        
+        <span class="badge">리더십 / 매니지먼트</span>
+        <h1>같은 피드백, 왜 누구에게는 통하고 누구에게는 안 통할까?</h1>
+        
+        <div class="meta-info">
+            <div class="author-img" style="background: url('https://via.placeholder.com/40') center/cover;"></div>
+            <div>
+                <strong>류지향 매니저</strong> · <span>2025. 12. 14</span>
+            </div>
+            <div style="margin-left: auto; color: var(--brand-color);">
+                <i class="fas fa-eye"></i> 1,204명이 읽음
+            </div>
+        </div>
 
-  <script src="gate.js" defer></script>
+        <div class="content">
+            <p>
+                많은 리더들이 팀원에게 피드백을 줄 때 고민에 빠집니다. "이 말을 하면 상처받지 않을까?" 혹은 "지난번에도 말했는데 왜 안 고쳐질까?" 같은 고민들이죠. 
+                피드백은 조직의 성장을 위해 필수적인 요소이지만, 잘못 전달된 피드백은 오히려 독이 될 수 있습니다.
+            </p>
+            <p>
+                하지만 많은 사람들이 <span class="highlight">상대방의 '준비 상태(Readiness)'</span>를 간과합니다. 
+                지시가 필요한 팀원에게 위임하고, 위임이 필요한 팀원에게 지시합니다. 그리고 팀원들의 원치 않는 반응에 당혹스러워합니다.
+            </p>
+            <p>
+                이것은 팀원들도 마찬가지입니다. 자신은 지시가 필요한데 위임을 원한다고 착각하거나, 반대로 위임이 필요한데 지시를 기대하는 경우도 있습니다.
+                지시와 위임, 어떤 방식으로 운영할 것인가에 대한 명확한 기준이 없다면 조직은 방향을 잃기 쉽습니다.
+            </p>
+            
+            <p>
+                상황적 리더십 이론에 따르면, 구성원의 역량과 의욕에 따라 4가지 단계로 나눌 수 있습니다. 
+                첫째, 역량은 낮지만 의욕이 높은 단계. 둘째, 역량도 낮고 의욕도 떨어진 단계. 셋째, 역량은 높지만 의욕이 불안정한 단계. 
+                마지막으로 역량과 의욕이 모두 높은 단계입니다.
+            </p>
+            <p>
+                각 단계별로 리더가 취해야 할 행동은 완전히 다릅니다. 초심자에게는 구체적인 지시가 필요하지만, 
+                숙련자에게 시시콜콜한 지시는 간섭으로 느껴질 뿐입니다. Loaning.ai에서도 이러한 리더십 원칙을 적용하여 팀을 운영하고 있습니다.
+            </p>
+            <p>
+                그렇다면 우리 팀원들은 현재 어떤 상태일까요? 그리고 나는 그들에게 적절한 피드백을 주고 있을까요?
+                지금부터 구체적인 진단 방법과 해결책을 하나씩 살펴보겠습니다. 이를 통해 당신은 팀원의 잠재력을 200% 이끌어내는 리더가 될 수 있습니다.
+            </p>
+            <div style="background:#f1f8f5; padding:20px; border-radius:8px; margin-top:30px;">
+                <strong>💡 요약 정리</strong>
+                <ul style="margin: 10px 0 0 20px; font-size: 15px;">
+                    <li>상대방의 준비 상태(Readiness) 파악이 우선이다.</li>
+                    <li>역량과 의욕에 따라 4단계로 구분하여 접근하라.</li>
+                    <li>지시와 위임의 적절한 밸런스를 찾아라.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-gate-overlay" id="gateOverlay">
+            <div class="gate-card">
+                <div class="gate-title">
+                    <i class="fas fa-lock"></i> 나머지 내용이 궁금하다면?
+                </div>
+                <div class="gate-desc">
+                    이메일을 입력하고 <strong>전체 아티클을 무료로</strong> 확인하세요.<br>
+                    Loaning.ai의 유용한 인사이트를 가장 먼저 보내드립니다.
+                </div>
+                
+                <form class="subscribe-form" onsubmit="unlockArticle(event)">
+                    <input type="email" class="subscribe-input" placeholder="이메일 주소를 입력해주세요" required>
+                    <button type="submit" class="subscribe-btn">계속 읽기</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function unlockArticle(e) {
+            e.preventDefault(); // 폼 제출 시 새로고침 방지
+
+            // 1. 게이트 화면 숨기기
+            const overlay = document.getElementById('gateOverlay');
+            overlay.classList.add('hidden');
+
+            // 2. 아티클 컨테이너 높이 제한 해제
+            const article = document.getElementById('mainArticle');
+            article.classList.add('unlocked');
+
+            // 3. (선택사항) 환영 메시지
+            alert("환영합니다! 전체 내용을 확인해보세요.");
+        }
+    </script>
+
 </body>
 </html>
