@@ -310,12 +310,12 @@
     <main class="article-container" id="mainArticle">
         
         <span class="badge">Loan Process Guide E-book</span>
-        <h1>내집 마련의 여정, 빠르고 안전하게 완주하기 위한 특별 Guide를 준비했어요. ☺️ </h1>
+        <h1>내집 마련의 여정, 빠르고 안전하게 완주하기 위한 특별 Guide를 준비했어요. ☺️</h1>
         
         <div class="meta-info">
             <span>2025. 12. 09</span>
             <div style="margin-left: auto; color: var(--brand-color);">
-                <i class="fas fa-eye"></i> 3,420명이 읽음
+                <i class="fas fa-eye"></i> <span id="read-count">3,420</span>명이 읽음
             </div>
         </div>
 
@@ -361,14 +361,15 @@
                 </div>
                 <div class="welcome-desc">
                     단 10초, 입력 한 번으로 가이드북을 받을 수 있어요. <br>
-                    가장 설레야 할 30일 간의 여정, Loaning.ai가 함께합니다. :)
+                    가장 설레야 할 30일 간의 여정. Loaning.ai가 함께합니다. :)
                 </div>
                 
                 <form class="subscribe-form" onsubmit="unlockArticle(event)">
-                    <input type="email" class="subscribe-input" placeholder="이메일 주소를 입력해주세요" required>
-                    <button type="submit" class="subscribe-btn">가이드 보기</button>
+                    <input type="email" class="subscribe-input" placeholder="이메일 주소를 입력해 주세요" required>
+                    <button type="submit" class="subscribe-btn">Enter</button>
                 </form>
-            </div>
+                
+                </div>
             
             <div style="opacity: 0.3; margin-top: 40px;"> <hr style="border:0; border-top:1px solid #eee; margin: 20px 0;">
                 <h3>Chapter 1. 모기지 프로세스 A to Z</h3>
@@ -416,7 +417,22 @@
                     const article = document.getElementById('mainArticle');
                     article.classList.add('unlocked');
 
+                    // 읽은 사람 수 +1 증가 로직
+                    const countSpan = document.getElementById('read-count');
+                    if (countSpan) {
+                        let currentCount = parseInt(countSpan.innerText.replace(/,/g, ''), 10);
+                        let newCount = currentCount + 1;
+                        countSpan.innerText = newCount.toLocaleString();
+                    }
+
+                    // 1차 알림
                     alert("잠시 기다려 주시면 이메일 주소로 E-book을 보내 드리겠습니다");
+
+                    // 2차 알림 (1분 후)
+                    setTimeout(function() {
+                        alert("감사합니다 😊");
+                    }, 60000); 
+
                 } else {
                     alert("이메일 전송에 실패했습니다.");
                     btn.innerText = originalText;
