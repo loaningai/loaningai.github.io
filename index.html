@@ -46,125 +46,33 @@
             align-items: center;
         }
 
-        /* 로고 스타일: 이미지를 사용하므로 폰트 설정 제거 및 크기 조정 */
-        .logo {
+        /* CSS로 구현한 로고 */
+        .logo-wrapper {
             display: flex;
             align-items: center;
+            gap: 6px;
             text-decoration: none;
+            font-family: "Segoe UI", sans-serif;
         }
 
-        .logo img {
-            height: 36px; /* 로고 높이 설정 (조절 가능) */
-            width: auto;  /* 비율 유지 */
+        .logo-icon {
+            font-size: 24px;
+            color: var(--brand-color);
         }
 
-        .nav-menu {
-            display: flex;
-            gap: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #666;
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+            color: #2c3e50;
+            letter-spacing: -0.5px;
+            line-height: 1;
         }
-        
-        .nav-menu span { cursor: pointer; }
-        .nav-menu span:hover { color: var(--brand-color); }
+
+        .logo-dot-ai {
+            color: var(--brand-color);
+        }
 
         /* 3. 아티클 레이아웃 */
         .article-container {
             max-width: 720px;
-            margin: 40px auto;
-            background: white;
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            position: relative;
-            
-            /* 핵심: 콘텐츠 게이트를 위한 높이 제한 */
-            max-height: 900px; 
-            overflow: hidden; 
-            transition: max-height 0.8s ease-in-out;
-        }
-
-        /* 아티클 헤더 */
-        .badge {
-            background-color: #e6f7f1;
-            color: var(--brand-color);
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 30px;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 20px;
-            word-break: keep-all;
-            color: #222;
-        }
-
-        .meta-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-        }
-
-        .author-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #ddd;
-        }
-
-        /* 본문 스타일 */
-        .content p {
-            margin-bottom: 24px;
-            font-size: 17px;
-            color: #444;
-        }
-
-        /* 3줄 요약 박스 스타일 */
-        .summary-box {
-            background-color: #f4fcf8;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid #dff2e9;
-        }
-        
-        .summary-title {
-            font-weight: 800;
-            margin-bottom: 15px;
-            display: block;
-            color: #2c3e50;
-        }
-
-        .summary-list {
-            list-style-type: disc;
-            padding-left: 20px;
-            margin: 0;
-        }
-
-        .summary-list li {
-            margin-bottom: 10px;
-            font-size: 15px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .summary-list li strong {
-            color: #333;
-            font-weight: 700;
-        }
-
-        /* 4. 콘텐츠 게이트 (잠금 화면) */
-        .content-gate-overlay {
-            position: absolute;
+            margin:
