@@ -26,7 +26,6 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.7;
-            /* 전체 글씨 두께를 보통으로 설정 */
             font-weight: 400; 
         }
 
@@ -64,7 +63,7 @@
 
         .logo-text {
             font-size: 26px;
-            font-weight: 400; /* 볼드 제거 */
+            font-weight: 400;
             color: #2c3e50;
             letter-spacing: -0.5px;
             line-height: 1;
@@ -94,14 +93,14 @@
             padding: 6px 12px;
             border-radius: 4px;
             font-size: 12px;
-            font-weight: 400; /* 볼드 제거 */
+            font-weight: 400;
             display: inline-block;
             margin-bottom: 15px;
         }
 
         h1 {
             font-size: 30px;
-            font-weight: 400; /* 볼드 제거 */
+            font-weight: 400;
             line-height: 1.4;
             margin-bottom: 20px;
             word-break: keep-all;
@@ -119,7 +118,7 @@
             padding-bottom: 20px;
         }
 
-        /* 애니메이션: 둥둥 떠있는 느낌 */
+        /* 애니메이션 */
         @keyframes gentle-float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
@@ -140,7 +139,7 @@
 
         .welcome-title {
             font-size: 24px;
-            font-weight: 400; /* 볼드 제거 */
+            font-weight: 400;
             color: #222;
             margin-bottom: 10px;
             display: flex;
@@ -182,7 +181,7 @@
             border: none;
             padding: 0 24px;
             border-radius: 8px;
-            font-weight: 400; /* 볼드 제거 */
+            font-weight: 400;
             font-size: 15px;
             cursor: pointer;
             transition: background-color 0.2s;
@@ -191,15 +190,6 @@
 
         .subscribe-btn:hover {
             background-color: var(--brand-hover);
-        }
-
-        /* 섹션 제목 */
-        h2 {
-            font-size: 22px;
-            font-weight: 400; /* 볼드 제거 */
-            color: #222;
-            margin-top: 40px;
-            margin-bottom: 15px;
         }
 
         /* 파란색 박스 */
@@ -213,10 +203,10 @@
             line-height: 1.8;
         }
 
-        /* 체크리스트 섹션 스타일 (수정됨) */
+        /* 체크리스트 섹션 스타일 */
         .checklist-title {
             font-size: 20px;
-            font-weight: 400; /* 볼드 제거 */
+            font-weight: 400;
             margin-top: 40px;
             margin-bottom: 20px;
             display: flex;
@@ -231,12 +221,11 @@
             margin-bottom: 15px;
             font-size: 16px;
             color: #444;
-            cursor: pointer; /* 클릭 가능 표시 */
+            cursor: pointer;
         }
 
-        /* 실제 체크박스 스타일링 */
         .real-checkbox {
-            appearance: none; /* 기본 스타일 제거 */
+            appearance: none;
             min-width: 20px;
             height: 20px;
             border: 2px solid #555;
@@ -249,15 +238,13 @@
             background-color: white;
         }
 
-        /* 체크되었을 때 스타일 */
         .real-checkbox:checked {
             background-color: var(--brand-color);
             border-color: var(--brand-color);
         }
 
-        /* 체크 표시 (V) 만들기 */
         .real-checkbox:checked::after {
-            content: '\2714'; /* 체크 문자 */
+            content: '\2714';
             font-size: 14px;
             color: white;
         }
@@ -308,7 +295,7 @@
 
     <main class="article-container" id="mainArticle">
         
-        <span class="badge">모기지 가이드 Ep.1</span>
+        <span class="badge">Loan Process Guide E-book</span>
         <h1>Offer Accepted(오퍼 수락) 후 3일, ‘이것’ 놓치면 계약금 날립니다</h1>
         
         <div class="meta-info">
@@ -319,6 +306,7 @@
         </div>
 
         <div class="content">
+            
             <p>
                 미국의 낯선 모기지 절차, 어떤 서류를 언제까지 준비해야 할지 막막하신가요?
             </p>
@@ -329,7 +317,7 @@
 
             <div class="blue-info-box">
                 <p>
-                    Loaning.ai는 이러한 불편함을 해결하기 위해 &lt;내집 마련 모기지 가이드&gt;를 준비했습니다. 계약 체결, 3단계의 Disclosure, 그리고 클로징까지 이어지는 모기지 프로세스를 한 권에 담았어요.
+                    Loaning.ai는 이러한 불편함을 해결하기 위해 &lt;내집 마련 모기지 가이드&gt;를 준비했습니다. 계약 체결부터 클로징까지의 여정을 한 권에 담았어요.
                 </p>
                 <p style="margin-top: 15px;">
                     AI 기반 구조화·자동화 시스템을 통해, 일반적인 클로징 기간을 70% 단축시킨 Loaning.ai의 안전하고 신속한 모기지 솔루션을 만나 보세요.
