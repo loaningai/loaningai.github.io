@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Loaning.ai - 아티클 읽기</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fa-solid fa-leaf"></i>
+      Loaning.ai
+    </div>
+    <nav aria-label="주요">
+      <a href="/">홈</a>
+      <a href="/articles">아티클</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article-wrapper" id="articleWrapper">
+      <div class="article-header">
+        <img src="https://picsum.photos/1200/400" alt="아티클 대표 이미지" />
+        <h1 id="articleTitle">데모 아티클 제목 — 콘텐츠 일부를 가리고 이메일을 요청하는 게이트</h1>
+        <div class="author-info">작성자: Loaning.ai • 2025-12-14</div>
+      </div>
+
+      <div class="content-body" id="contentBody" tabindex="-1" aria-live="polite">
+        <p>이 곳은 아티클의 첫 부분입니다. 게이트는 본문 하단에 반투명 오버레이로 표시되어 남은 내용을 숨깁니다.</p>
+        <p>이 예제에서는 이메일을 입력하면 본문 전체를 부드럽게 노출합니다. 실제 서비스에서는 백엔드(예: Mailchimp, SendGrid 등)에 가입 요청을 보낼 수 있습니다.</p>
+        <p>여기에 더 많은 샘플 텍스트가 들어갑니다. 아래 버튼을 통해 게이트를 해제해보세요.</p>
+
+        <h2>추가 섹션</h2>
+        <p>게이트가 해제되면 이 섹션을 포함한 전체 본문이 보입니다. 접근성 측면에서 포커스를 안전하게 이동시켰습니다.</p>
+        <p>더 많은 본문...</p>
+        <p>끝.</p>
+      </div>
+
+      <!-- 콘텐츠 게이트 (JS 컨트롤) -->
+      <div class="content-gate" id="contentGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle" aria-describedby="gateDesc">
+        <div class="gate-box" role="group" aria-label="콘텐츠 잠금 해제">
+          <div class="gate-title" id="gateTitle">계속 읽으려면 이메일을 입력하세요</div>
+          <div class="gate-desc" id="gateDesc">최신 글 알림과 요약을 정기적으로 보내드려요. 언제든 구독 해지 가능합니다.</div>
+
+          <form id="gateForm" novalidate>
+            <label for="emailInput" class="visually-hidden">이메일 주소</label>
+            <input id="emailInput" name="email" type="email" inputmode="email" placeholder="you@domain.com" required aria-required="true" />
+            <div class="form-row">
+              <button type="submit" id="submitBtn" class="btn-primary">이메일로 구독하고 계속 읽기</button>
+            </div>
+            <p class="error-message" id="errorMessage" aria-live="assertive"></p>
+            <p class="small-muted">우리는 스팸을 보내지 않습니다. 개인정보취급방침을 확인하세요.</p>
+          </form>
+        </div>
+      </div>
+
+      <noscript>
+        <style>
+          /* 자바스크립트가 없을 때는 게이트를 숨기고 전체 내용을 보여줍니다(검색엔진/접근성 보장) */
+          .content-gate { display: none !important; }
+          .article-wrapper { max-height: none !important; overflow: visible !important; }
+        </style>
+        <p class="small-muted">브라우저에서 자바스크립트가 비활성화되어 있으므로 전체 본문을 표시합니다.</p>
+      </noscript>
+    </article>
+  </main>
+
+  <script src="gate.js" defer></script>
+</body>
+</html>
