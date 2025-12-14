@@ -25,7 +25,6 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            /* [수정] 줄 간격을 1.7 -> 1.5로 좁힘 */
             line-height: 1.5; 
             font-weight: 400; 
         }
@@ -102,7 +101,7 @@
         h1 {
             font-size: 30px;
             font-weight: 400;
-            line-height: 1.3; /* [수정] 제목 줄 간격 축소 */
+            line-height: 1.3;
             margin-bottom: 20px;
             word-break: keep-all;
             color: #222;
@@ -114,7 +113,7 @@
             gap: 10px;
             font-size: 14px;
             color: #888;
-            margin-bottom: 30px; /* [수정] 간격 축소 */
+            margin-bottom: 30px;
             border-bottom: 1px solid #eee;
             padding-bottom: 20px;
         }
@@ -134,7 +133,7 @@
             padding: 30px; 
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 168, 107, 0.15);
-            margin: 40px 0 20px 0; /* [수정] 위쪽 여백 축소 */
+            margin: 40px 0 20px 0;
             animation: gentle-float 3s ease-in-out infinite;
         }
 
@@ -193,36 +192,36 @@
             background-color: var(--brand-hover);
         }
 
-        /* 본문 스타일 [수정] 문단 간격 축소 */
+        /* 본문 스타일 */
         .content p {
-            margin-bottom: 15px; /* 기존 24px -> 15px */
+            margin-bottom: 15px;
         }
 
-        /* 섹션 제목 [수정] 간격 축소 */
+        /* 섹션 제목 */
         h2 {
             font-size: 22px;
             font-weight: 400;
             color: #222;
-            margin-top: 30px; /* 기존 40px -> 30px */
+            margin-top: 30px;
             margin-bottom: 10px;
         }
 
-        /* 파란색 박스 [수정] 내부 여백 및 간격 축소 */
+        /* 파란색 박스 */
         .blue-info-box {
             background-color: var(--blue-box-bg);
-            padding: 20px; /* 기존 25px -> 20px */
+            padding: 20px;
             border-radius: 8px;
-            margin: 20px 0; /* 기존 30px -> 20px */
+            margin: 20px 0;
             font-size: 16px;
             color: #333;
-            line-height: 1.5; /* 줄 간격 축소 */
+            line-height: 1.5;
         }
 
-        /* 체크리스트 섹션 스타일 [수정] 간격 축소 */
+        /* 체크리스트 섹션 스타일 */
         .checklist-title {
             font-size: 20px;
             font-weight: 400;
-            margin-top: 30px; /* 기존 40px -> 30px */
+            margin-top: 30px;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -233,7 +232,7 @@
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            margin-bottom: 10px; /* 기존 15px -> 10px */
+            margin-bottom: 10px;
             font-size: 16px;
             color: #444;
             cursor: pointer;
@@ -310,8 +309,8 @@
 
     <main class="article-container" id="mainArticle">
         
-        <span class="badge">Loan Process Guide E-book</span>
-        <h1>Offer Accepted(오퍼 수락) 후 3일, ‘이것’ 놓치면 계약금 날립니다</h1>
+        <span class="badge">Loan Process Guide</span>
+        <h1>내집 마련의 여정, 가장 설레야 할 30일을 빠르고 안전하게 완주해 보세요. ☺️</h1>
         
         <div class="meta-info">
             <span>2025. 12. 09</span>
@@ -334,7 +333,8 @@
                 <p>
                     Loaning.ai는 이러한 불편함을 해결하기 위해 &lt;내집 마련 모기지 가이드&gt;를 준비했습니다. 계약 체결부터 클로징까지의 여정을 한 권에 담았어요.
                 </p>
-                <p style="margin-top: 10px;"> AI 기반 구조화·자동화 시스템을 통해, 일반적인 클로징 기간을 70% 단축시킨 Loaning.ai의 안전하고 신속한 모기지 솔루션을 만나 보세요.
+                <p style="margin-top: 10px;">
+                    AI 기반 구조화·자동화 시스템을 통해, 일반적인 클로징 기간을 70% 단축시킨 Loaning.ai의 안전하고 신속한 모기지 솔루션을 만나 보세요.
                 </p>
             </div>
 
@@ -360,12 +360,13 @@
                     <i class="fas fa-lock"></i> 환영해요
                 </div>
                 <div class="welcome-desc">
-                    단 10초, 입력 한 번으로<br>Loaning.ai만의 가이드북을 받아 보세요. :)
+                    단 10초, 입력 한 번으로 E-book을 받을 수 있어요.<br>
+                    가장 빠르고 안전한 미국 주택 담보 대출, Loaning.ai가 함께합니다. :)
                 </div>
                 
                 <form class="subscribe-form" onsubmit="unlockArticle(event)">
-                    <input type="email" class="subscribe-input" placeholder="이메일 주소를 입력해주세요" required>
-                    <button type="submit" class="subscribe-btn">가이드 보기</button>
+                    <input type="email" class="subscribe-input" placeholder="이메일 주소를 입력해 주세요" required>
+                    <button type="submit" class="subscribe-btn">Enter</button>
                 </form>
             </div>
             
