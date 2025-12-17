@@ -1,450 +1,735 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loaning.ai - 내집 마련 모기지 가이드</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* 1. 기본 설정 및 브랜드 컬러 정의 */
-        :root {
-            --brand-color: #00a86b; /* Loaning.ai Green */
-            --brand-hover: #008f5b;
-            --text-color: #333;
-            --bg-color: #f8f9fa;
-            --blue-box-bg: #eaf4fc;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.5; 
-            font-weight: 400; 
-        }
-
-        /* 2. 네비게이션 바 */
-        header {
-            background: white;
-            border-bottom: 1px solid #e1e1e1;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            font-family: "Segoe UI", sans-serif;
-        }
-
-        .logo-icon {
-            font-size: 24px;
-            color: var(--brand-color);
-        }
-
-        .logo-text {
-            font-size: 26px;
-            font-weight: 400;
-            color: #2c3e50;
-            letter-spacing: -0.5px;
-            line-height: 1;
-        }
-
-        .logo-dot-ai {
-            color: var(--brand-color);
-        }
-
-        /* 3. 아티클 레이아웃 */
-        .article-container {
-            max-width: 720px;
-            margin: 40px auto;
-            background: white;
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            position: relative;
-            max-height: 1800px; 
-            overflow: hidden; 
-            transition: max-height 0.8s ease-in-out;
-        }
-
-        .badge {
-            background-color: #e6f7f1;
-            color: var(--brand-color);
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 400;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 30px;
-            font-weight: 400;
-            line-height: 1.3;
-            margin-bottom: 20px;
-            word-break: keep-all;
-            color: #222;
-        }
-
-        .meta-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-        }
-
-        /* 애니메이션 */
-        @keyframes gentle-float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* 입력 박스 스타일 */
-        .welcome-box {
-            background: white;
-            border: 2px solid var(--brand-color);
-            border-radius: 16px;
-            padding: 30px; 
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 168, 107, 0.15);
-            margin: 40px 0 20px 0;
-            animation: gentle-float 3s ease-in-out infinite;
-        }
-
-        .welcome-title {
-            font-size: 24px;
-            font-weight: 400;
-            color: #222;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .welcome-desc {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .subscribe-form {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .subscribe-input {
-            flex: 1;
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .subscribe-input:focus {
-            border-color: var(--brand-color);
-        }
-
-        .subscribe-btn {
-            background-color: var(--brand-color);
-            color: white;
-            border: none;
-            padding: 0 24px;
-            border-radius: 8px;
-            font-weight: 400;
-            font-size: 15px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            white-space: nowrap;
-        }
-
-        .subscribe-btn:hover {
-            background-color: var(--brand-hover);
-        }
-
-        /* 본문 스타일 */
-        .content p {
-            margin-bottom: 15px;
-        }
-
-        /* 섹션 제목 */
-        h2 {
-            font-size: 22px;
-            font-weight: 400;
-            color: #222;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-
-        /* 파란색 박스 */
-        .blue-info-box {
-            background-color: var(--blue-box-bg);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-size: 16px;
-            color: #333;
-            line-height: 1.5;
-        }
-
-        /* 체크리스트 섹션 스타일 */
-        .checklist-title {
-            font-size: 20px;
-            font-weight: 400;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            color: #444;
-            cursor: pointer;
-        }
-
-        .real-checkbox {
-            appearance: none;
-            min-width: 20px;
-            height: 20px;
-            border: 2px solid #555;
-            border-radius: 3px;
-            margin-top: 3px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-        }
-
-        .real-checkbox:checked {
-            background-color: var(--brand-color);
-            border-color: var(--brand-color);
-        }
-
-        .real-checkbox:checked::after {
-            content: '\2714';
-            font-size: 14px;
-            color: white;
-        }
-
-        /* 4. 콘텐츠 게이트 (하단 가림막) */
-        .content-gate-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 200px; 
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 40%, #ffffff 80%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding-bottom: 60px;
-            z-index: 10;
-        }
-
-        .unlocked {
-            max-height: 5000px !important;
-            mask-image: none !important;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-
-        @media (max-width: 768px) {
-            .article-container { padding: 30px 20px; }
-            h1 { font-size: 24px; }
-            .subscribe-form { flex-direction: column; }
-            .subscribe-btn { padding: 14px; width: 100%; }
-        }
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Apple SD Gothic Neo'; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px 'Apple SD Gothic Neo'; font-kerning: none}
+    span.s3 {font: 12.0px 'Apple Color Emoji'; font-kerning: none}
+    span.s4 {font: 12.0px 'Lucida Grande'; font-kerning: none}
+    span.s5 {font: 12.0px Helvetica; font-kerning: none}
+  </style>
 </head>
 <body>
-
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo-wrapper">
-                <i class="fas fa-home logo-icon"></i>
-                <span class="logo-text">Loaning<span class="logo-dot-ai">.ai</span></span>
-            </a>
-        </div>
-    </header>
-
-    <main class="article-container" id="mainArticle">
-        
-        <span class="badge">Loan Process Guide E-book</span>
-        <h1>내집 마련의 여정, 빠르고 안전하게 완주하기 위한 특별 Guide를 준비했어요. ☺️</h1>
-        
-        <div class="meta-info">
-            <span>2025. 12. 09</span>
-            <div style="margin-left: auto; color: var(--brand-color);">
-                <i class="fas fa-eye"></i> <span id="read-count">3,420</span>명이 읽음
-            </div>
-        </div>
-
-        <div class="content">
-            
-            <p>
-                미국의 낯선 모기지 절차, 어떤 서류를 언제까지 준비해야 할지 막막하신가요?
-            </p>
-            <p>
-                한국과 달리, 복잡한 금융 용어와 산더미 같은 요청 서류들. 
-                기한을 놓치면 클로징이 미뤄질 수 있다는 압박감에 혼자서 정보를 찾고 판단한다는 건 너무나 버거운 일입니다.
-            </p>
-
-            <div class="blue-info-box">
-                <p>
-                    Loaning.ai는 이러한 불편함을 해결하기 위해 &lt;내집 마련 모기지 가이드&gt;를 준비했습니다. 계약 체결부터 클로징까지의 여정을 한 권에 담았어요.
-                </p>
-                <p style="margin-top: 10px;">
-                    AI 기반 구조화·자동화 시스템을 통해, 일반적인 클로징 기간을 70% 단축시킨 Loaning.ai의 안전하고 신속한 모기지 솔루션을 만나 보세요.
-                </p>
-            </div>
-
-            <div class="checklist-title">
-                💡 이 가이드는 이런 분들을 위해 만들어졌어요
-            </div>
-            
-            <label class="checklist-item">
-                <input type="checkbox" class="real-checkbox">
-                <div>집을 계약했는데, 모기지 진행 현황을 알 수 없어 불안하신 분</div>
-            </label>
-            <label class="checklist-item">
-                <input type="checkbox" class="real-checkbox">
-                <div>모기지 절차가 낯설어 어떤 서류를 언제까지 준비해야 할지 막막하신 분</div>
-            </label>
-            <label class="checklist-item">
-                <input type="checkbox" class="real-checkbox">
-                <div>대출 금액이 크지 않더라도 내 상황을 끝까지 챙겨 주는 파트너가 필요하신 분</div>
-            </label>
-
-            <div class="welcome-box">
-                <div class="welcome-title">
-                    <i class="fas fa-lock"></i> 환영해요
-                </div>
-                <div class="welcome-desc">
-                    단 10초, 입력 한 번으로 가이드북을 받을 수 있어요. <br>
-                    가장 설레야 할 30일 간의 여정. Loaning.ai가 함께합니다. :)
-                </div>
-                
-                <form class="subscribe-form" onsubmit="unlockArticle(event)">
-                    <input type="email" class="subscribe-input" placeholder="이메일 주소를 입력해 주세요" required>
-                    <button type="submit" class="subscribe-btn">Enter</button>
-                </form>
-                
-                </div>
-            
-            <div style="opacity: 0.3; margin-top: 40px;"> <hr style="border:0; border-top:1px solid #eee; margin: 20px 0;">
-                <h3>Chapter 1. 모기지 프로세스 A to Z</h3>
-                <p>
-                    미국에서 집을 살 때 가장 먼저 해야 할 일은 무엇일까요? 바로 'Pre-Approval Letter'를 받는 것입니다. 
-                    많은 분들이 집을 먼저 보고 대출을 알아보지만, 실제로는 대출 가능 금액을 먼저 확인해야 예산에 맞는 집을 효율적으로 찾을 수 있습니다.
-                </p>
-            </div>
-
-        </div>
-
-        <div class="content-gate-overlay" id="gateOverlay">
-        </div>
-
-    </main>
-
-    <script>
-        function unlockArticle(e) {
-            e.preventDefault();
-
-            const form = e.target;
-            const emailInput = form.querySelector('.subscribe-input');
-            const emailValue = emailInput.value;
-            const btn = form.querySelector('.subscribe-btn');
-            const originalText = btn.innerText;
-
-            btn.innerText = "전송 중...";
-            btn.disabled = true;
-
-            fetch("https://formspree.io/f/mvgeyzvl", { 
-                method: "POST",
-                body: JSON.stringify({
-                    email: emailValue,
-                    source: "Loaning_Mortgage_Guide_Intro"
-                }),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    const overlay = document.getElementById('gateOverlay');
-                    if (overlay) overlay.classList.add('hidden');
-
-                    const article = document.getElementById('mainArticle');
-                    article.classList.add('unlocked');
-
-                    // 읽은 사람 수 +1 증가 로직
-                    const countSpan = document.getElementById('read-count');
-                    if (countSpan) {
-                        let currentCount = parseInt(countSpan.innerText.replace(/,/g, ''), 10);
-                        let newCount = currentCount + 1;
-                        countSpan.innerText = newCount.toLocaleString();
-                    }
-
-                    // 1차 알림
-                    alert("잠시 기다려 주시면 이메일 주소로 E-book을 보내 드리겠습니다");
-
-                    // 2차 알림 (1분 후)
-                    setTimeout(function() {
-                        alert("감사합니다 😊");
-                    }, 60000); 
-
-                } else {
-                    alert("이메일 전송에 실패했습니다.");
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                }
-            }).catch(error => {
-                alert("오류: " + error.message);
-                btn.innerText = originalText;
-                btn.disabled = false;
-            });
-        }
-    </script>
-
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="ko"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;Loaning.ai SEO </span><span class="s2">클러스터</span><span class="s1"> </span><span class="s2">설계</span><span class="s1"> </span><span class="s2">가이드</span><span class="s1">&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>:root {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--primary-color: #0F172A; /* Deep Navy */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--accent-color: #3B82F6;<span class="Apple-converted-space">  </span>/* Bright Blue */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--text-color: #334155;<span class="Apple-converted-space">    </span>/* Slate Grey */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--light-bg: #F8FAFC;<span class="Apple-converted-space">      </span>/* Very Light Grey */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--border-color: #E2E8F0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--success-color: #10B981;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--warning-color: #F59E0B;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-family: 'Pretendard', sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #EDF2F7;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: var(--text-color);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>line-height: 1.6;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 40px 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.container {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 900px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0 auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Slide Common Style */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.slide {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>min-height: 600px; /* A4 Ratio approximation for screen */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 50px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 50px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: relative;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>page-break-after: always;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 1. Cover Slide Styling */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.cover-slide {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>flex-direction: column;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: space-between;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: left;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: relative;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.cover-slide::before {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>content: '';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 0; right: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 300px; height: 300px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(0,0,0,0) 70%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.cover-header {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-left: 5px solid var(--accent-color);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding-left: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-top: 60px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.cover-subtitle {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #94a3b8;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 500;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>letter-spacing: 1px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.cover-title {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 3rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 800;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>line-height: 1.2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.cover-desc {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-top: 30px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #cbd5e1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 80%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.cover-footer {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-top: 1px solid rgba(255,255,255,0.1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding-top: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: space-between;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: flex-end;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.brand-box {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.9rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #94a3b8;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.brand-box strong {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: block;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 2. Content Slide Header */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.slide-header {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: space-between;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-bottom: 2px solid var(--light-bg);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding-bottom: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.slide-title {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: var(--primary-color);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gap: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.chapter-tag {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.8rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 4px 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 6px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 600;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.ch-1 { background: #E0F2FE; color: #0369A1; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.ch-2 { background: #DCFCE7; color: #15803D; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.ch-3 { background: #FFEDD5; color: #C2410C; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.ch-4 { background: #F3E8FF; color: #7E22CE; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.slide-num {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #94a3b8;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 600;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* 3. Components */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.file-badge {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: inline-flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gap: 6px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #F1F5F9;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #475569;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 6px 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 6px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.85rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-family: monospace;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid #CBD5E1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.highlight-box {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: var(--light-bg);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-left: 4px solid var(--accent-color);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 0 8px 8px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 20px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.highlight-box h4 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0 0 8px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: var(--primary-color);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.highlight-box p {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #475569;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>h3 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 1.2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: var(--primary-color);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-top: 25px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>ul, ol {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding-left: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #475569;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>li { margin-bottom: 8px; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Flow Chart */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.flow-wrapper {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>justify-content: space-between;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 40px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.flow-item {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>flex: 1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid #E2E8F0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: transform 0.2s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.flow-item:hover { transform: translateY(-3px); border-color: var(--accent-color); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.flow-icon { font-size: 1.8rem; margin-bottom: 10px; color: var(--accent-color); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.flow-arrow { color: #CBD5E1; font-size: 1.5rem; margin: 0 10px; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Tables */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.custom-table {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-collapse: collapse;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.95rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 20px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.custom-table th {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #F8FAFC;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: var(--primary-color);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 600;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: left;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-bottom: 2px solid #E2E8F0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.custom-table td {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #E2E8F0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>vertical-align: top;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #475569;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tag {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: inline-block;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 2px 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.75rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: 600;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Tips &amp; Footer */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tip-box {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-top: auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #FFFBEB;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid #FCD34D;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 15px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 0.9rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #92400E;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>align-items: flex-start;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gap: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>strong { color: var(--primary-color); }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Print Optimization */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>@media print {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>body { background: white; padding: 0; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.container { max-width: 100%; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.slide { box-shadow: none; margin: 0; border-radius: 0; border-bottom: 1px solid #ddd; min-height: 100vh; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>.cover-slide { -webkit-print-color-adjust: exact; print-color-adjust: exact; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="container"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide cover-slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="cover-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="cover-subtitle"&gt;Loaning.ai Internal Guide Vol.1&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h1 class="cover-title"&gt;SEO Cluster&lt;br&gt;Strategy Manual&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p class="cover-desc"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s2">보험</span><span class="s1">, </span><span class="s2">연금</span><span class="s1">, </span><span class="s2">가계부</span><span class="s1"> </span><span class="s2">등</span><span class="s1"> </span><span class="s2">타</span><span class="s1"> </span><span class="s2">부서를</span><span class="s1"> </span><span class="s2">위한</span><span class="s1"> </span><span class="s2">리스닝</span><span class="s1"> </span><span class="s2">마인드</span><span class="s1">(Listening Mind) </span><span class="s2">활용</span><span class="s1"> </span><span class="s2">가이드</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s2">데이터</span><span class="s1"> </span><span class="s2">기반의</span><span class="s1"> </span><span class="s2">고객</span><span class="s1"> </span><span class="s2">의도</span><span class="s1"> </span><span class="s2">분석부터</span><span class="s1"> </span><span class="s2">콘텐츠</span><span class="s1"> </span><span class="s2">매핑까지</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="cover-footer"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="brand-box"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong&gt;Content Marketing Team&lt;/strong&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>December, 2025</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div style="font-size: 2rem; opacity: 0.2;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;i class="fas fa-chart-network"&gt;&lt;/i&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-1"&gt;Chapter 1&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s2">전체</span><span class="s1"> </span><span class="s2">프로세스</span><span class="s1"> </span><span class="s2">로드맵</span><span class="s1"> (Workflow)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;02&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="highlight-box"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h4&gt;</span><span class="s3">💡</span><span class="s1"> Core Message&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;"</span><span class="s2">막연한</span><span class="s1"> '</span><span class="s2">감</span><span class="s1">(Feeling)'</span><span class="s2">이</span><span class="s1"> </span><span class="s2">아닌</span><span class="s1">, </span><span class="s2">데이터가</span><span class="s1"> </span><span class="s2">보여주는</span><span class="s1"> '</span><span class="s2">길</span><span class="s1">(Road)'</span><span class="s2">을</span><span class="s1"> </span><span class="s2">따라갑니다</span><span class="s1">."&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">🔍</span><span class="s1"> SEO </span><span class="s2">클러스터</span><span class="s1"> </span><span class="s2">설계</span><span class="s1"> 4</span><span class="s2">단계</span><span class="s1">&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p style="color:#64748b; margin-bottom:30px;"&gt;</span><span class="s2">각</span><span class="s1"> </span><span class="s2">단계는</span><span class="s1"> </span><span class="s2">제공된</span><span class="s1"> </span><span class="s2">엑셀</span><span class="s1"> </span><span class="s2">템플릿</span><span class="s1"> </span><span class="s2">파일과</span><span class="s1"> </span><span class="s2">유기적으로</span><span class="s1"> </span><span class="s2">연결됩니다</span><span class="s1">.&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="flow-wrapper"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flow-item"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flow-icon"&gt;&lt;i class="fas fa-search-location"&gt;&lt;/i&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong&gt;1. Discovery&lt;/strong&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="font-size:0.8rem; color:#64748b;"&gt;</span><span class="s2">광산</span><span class="s1"> </span><span class="s2">찾기</span><span class="s1">&lt;br&gt;(Step 1)&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flow-arrow"&gt;</span><span class="s4">→</span><span class="s1">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flow-item"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flow-icon"&gt;&lt;i class="fas fa-filter"&gt;&lt;/i&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong&gt;2. Filtering&lt;/strong&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="font-size:0.8rem; color:#64748b;"&gt;</span><span class="s2">옥석</span><span class="s1"> </span><span class="s2">가리기</span><span class="s1">&lt;br&gt;(Step 2)&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flow-arrow"&gt;</span><span class="s4">→</span><span class="s1">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flow-item"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flow-icon"&gt;&lt;i class="fas fa-sort-amount-up"&gt;&lt;/i&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong&gt;3. Scoring&lt;/strong&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="font-size:0.8rem; color:#64748b;"&gt;</span><span class="s2">우선순위</span><span class="s1"> </span><span class="s2">선정</span><span class="s1">&lt;br&gt;(Step 3, 4)&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flow-arrow"&gt;</span><span class="s4">→</span><span class="s1">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flow-item"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flow-icon"&gt;&lt;i class="fas fa-map-signs"&gt;&lt;/i&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong&gt;4. Mapping&lt;/strong&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="font-size:0.8rem; color:#64748b;"&gt;</span><span class="s2">전략</span><span class="s1"> </span><span class="s2">매핑</span><span class="s1">&lt;br&gt;(Step 5, 6)&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-1"&gt;Chapter 1&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[Step 1] </span><span class="s2">데이터</span><span class="s1"> </span><span class="s2">광산</span><span class="s1"> </span><span class="s2">발굴하기</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;03&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="file-badge"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-file-csv"&gt;&lt;/i&gt; </span><span class="s2">참조</span><span class="s1"> </span><span class="s2">파일</span><span class="s1">: Step1. KeywordAll.csv</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">🛠️</span><span class="s1"> Action Items&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;ol&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;strong&gt;</span><span class="s2">리스닝</span><span class="s1"> </span><span class="s2">마인드</span><span class="s1"> </span><span class="s2">접속</span><span class="s1">:&lt;/strong&gt; '</span><span class="s2">인텐트</span><span class="s1"> </span><span class="s2">파인더</span><span class="s1">(Intent Finder)' </span><span class="s2">기능을</span><span class="s1"> </span><span class="s2">실행합니다</span><span class="s1">.&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;strong&gt;</span><span class="s2">시드</span><span class="s1">(Seed) </span><span class="s2">키워드</span><span class="s1"> </span><span class="s2">입력</span><span class="s1">:&lt;/strong&gt;<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="margin: 5px 0 10px 0; font-size: 0.95rem;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span></span><span class="s2">우리</span><span class="s1"> </span><span class="s2">비즈니스의</span><span class="s1"> </span><span class="s2">가장</span><span class="s1"> </span><span class="s2">기초가</span><span class="s1"> </span><span class="s2">되는</span><span class="s1"> '</span><span class="s2">뿌리</span><span class="s1"> </span><span class="s2">단어</span><span class="s1">'</span><span class="s2">를</span><span class="s1"> </span><span class="s2">입력합니다</span><span class="s1">.&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span style="color: #ef4444;"&gt;&lt;i class="fas fa-times-circle"&gt;&lt;/i&gt; Bad:&lt;/span&gt; "30</span><span class="s2">대</span><span class="s1"> </span><span class="s2">직장인</span><span class="s1"> </span><span class="s2">연금</span><span class="s1"> </span><span class="s2">저축</span><span class="s1"> </span><span class="s2">추천</span><span class="s1">" (</span><span class="s2">너무</span><span class="s1"> </span><span class="s2">구체적</span><span class="s1">)&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span style="color: #10b981;"&gt;&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; Good:&lt;/span&gt; "</span><span class="s2">미국</span><span class="s1"> </span><span class="s2">연금</span><span class="s1">", "401k", "IRA", "</span><span class="s2">자동차</span><span class="s1"> </span><span class="s2">보험</span><span class="s1">" (</span><span class="s2">포괄적</span><span class="s1">)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;strong&gt;Raw Data </span><span class="s2">추출</span><span class="s1">:&lt;/strong&gt; </span><span class="s2">연관어</span><span class="s1">, </span><span class="s2">파생어를</span><span class="s1"> </span><span class="s2">포함한</span><span class="s1"> </span><span class="s2">전체</span><span class="s1"> </span><span class="s2">리스트를</span><span class="s1"> </span><span class="s2">다운로드합니다</span><span class="s1">.&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/ol&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tip-box"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-lightbulb"&gt;&lt;/i&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong&gt;Marketer's Tip: PAA (People Also Ask) </span><span class="s2">확인하기</span><span class="s1">&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s1">단순</span><span class="s5"> </span><span class="s1">키워드뿐만</span><span class="s5"> </span><span class="s1">아니라</span><span class="s5"> '</span><span class="s1">관련</span><span class="s5"> </span><span class="s1">질문</span><span class="s5">(PAA)' </span><span class="s1">데이터도</span><span class="s5"> </span><span class="s1">함께</span><span class="s5"> </span><span class="s1">수집하세요</span><span class="s5">. </span><span class="s1">고객들이</span><span class="s5"> </span><span class="s1">실제로</span><span class="s5"> </span><span class="s1">무엇을</span><span class="s5"> </span><span class="s1">궁금해하는지</span><span class="s5"> </span><span class="s1">보여주는</span><span class="s5"> </span><span class="s1">가장</span><span class="s5"> </span><span class="s1">강력한</span><span class="s5"> </span><span class="s1">단서입니다</span><span class="s5">.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-2"&gt;Chapter 2&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[Step 2] </span><span class="s2">옥석</span><span class="s1"> </span><span class="s2">가리기</span><span class="s1"> (Filtering)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;04&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="file-badge"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-file-csv"&gt;&lt;/i&gt; </span><span class="s2">참조</span><span class="s1"> </span><span class="s2">파일</span><span class="s1">: Step2. Keyword Filtering.csv</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">🧹</span><span class="s1"> </span><span class="s2">필터링</span><span class="s1"> </span><span class="s2">기준</span><span class="s1"> </span><span class="s2">가이드</span><span class="s1">&lt;/h3&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;p&gt;</span><span class="s1">수집된</span><span class="s5"> </span><span class="s1">수만</span><span class="s5"> </span><span class="s1">개의</span><span class="s5"> </span><span class="s1">키워드</span><span class="s5"> </span><span class="s1">중</span><span class="s5">, </span><span class="s1">우리</span><span class="s5"> </span><span class="s1">비즈니스에</span><span class="s5"> </span><span class="s1">실질적</span><span class="s5"> </span><span class="s1">도움이</span><span class="s5"> </span><span class="s1">되는</span><span class="s5"> </span><span class="s1">단어만</span><span class="s5"> </span><span class="s1">남기는</span><span class="s5"> </span><span class="s1">과정입니다</span><span class="s5">.&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;table class="custom-table"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;thead&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;th style="width: 50%; border-bottom: 2px solid #ef4444;"&gt;</span><span class="s3">❌</span><span class="s1"> </span><span class="s2">소거</span><span class="s1"> </span><span class="s2">조건</span><span class="s1"> (Negative)&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;th style="width: 50%; border-bottom: 2px solid #10b981;"&gt;</span><span class="s3">⭕</span><span class="s1"> </span><span class="s2">포함</span><span class="s1"> </span><span class="s2">조건</span><span class="s1"> (Positive)&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/thead&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;tbody&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;strong&gt;"</span><span class="s2">트래픽은</span><span class="s1"> </span><span class="s2">있지만</span><span class="s1">, </span><span class="s2">고객은</span><span class="s1"> </span><span class="s2">아니다</span><span class="s1">"&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s2">단순</span><span class="s1"> </span><span class="s2">정보성</span><span class="s1">, </span><span class="s2">무료</span><span class="s1"> </span><span class="s2">자료</span><span class="s1">, </span><span class="s2">부정적</span><span class="s1"> </span><span class="s2">이슈</span><span class="s1"> </span><span class="s2">등</span><span class="s1">&lt;br&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;em&gt;Example:&lt;/em&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;ul style="margin-top:5px; font-size:0.9rem;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;</span><span class="s2">단순</span><span class="s1"> </span><span class="s2">뜻풀이</span><span class="s1">: `~</span><span class="s2">뜻</span><span class="s1">`, `~</span><span class="s2">정의</span><span class="s1">`, `~</span><span class="s2">스펠링</span><span class="s1">`&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;</span><span class="s2">무료</span><span class="s1"> </span><span class="s2">자료</span><span class="s1">: `~</span><span class="s2">이미지</span><span class="s1">`, `~PPT`, `~</span><span class="s2">다운로드</span><span class="s1">`&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;</span><span class="s2">가십</span><span class="s1">/</span><span class="s2">뉴스</span><span class="s1">: `~</span><span class="s2">사기</span><span class="s1">`, `~</span><span class="s2">뉴스</span><span class="s1">`, `~</span><span class="s2">사건</span><span class="s1">`&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;strong&gt;"</span><span class="s2">문제를</span><span class="s1"> </span><span class="s2">해결하려는</span><span class="s1"> </span><span class="s2">의도가</span><span class="s1"> </span><span class="s2">보인다</span><span class="s1">"&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s2">비교</span><span class="s1">, </span><span class="s2">추천</span><span class="s1">, </span><span class="s2">방법</span><span class="s1">, </span><span class="s2">비용</span><span class="s1"> </span><span class="s2">등</span><span class="s1"> </span><span class="s2">행동</span><span class="s1"> </span><span class="s2">유발</span><span class="s1"> </span><span class="s2">단어</span><span class="s1">&lt;br&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;em&gt;Example:&lt;/em&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;ul style="margin-top:5px; font-size:0.9rem;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;</span><span class="s2">비교</span><span class="s1">/</span><span class="s2">탐색</span><span class="s1">: `~</span><span class="s2">비교</span><span class="s1">`, `~</span><span class="s2">추천</span><span class="s1">`, `~</span><span class="s2">순위</span><span class="s1">`, `~</span><span class="s2">장단점</span><span class="s1">`&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;</span><span class="s2">실행</span><span class="s1"> </span><span class="s2">의도</span><span class="s1">: `~</span><span class="s2">가입</span><span class="s1"> </span><span class="s2">방법</span><span class="s1">`, `~</span><span class="s2">신청</span><span class="s1">`, `~</span><span class="s2">서류</span><span class="s1">`&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;</span><span class="s2">비용</span><span class="s1"> </span><span class="s2">고려</span><span class="s1">: `~</span><span class="s2">금리</span><span class="s1">`, `~</span><span class="s2">수수료</span><span class="s1">`, `~</span><span class="s2">계산기</span><span class="s1">`&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/tbody&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/table&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-2"&gt;Chapter 2&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[Step 3] </span><span class="s2">효율성</span><span class="s1"> </span><span class="s2">분석</span><span class="s1"> (Scoring)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;05&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="file-badge"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-file-csv"&gt;&lt;/i&gt; </span><span class="s2">참조</span><span class="s1"> </span><span class="s2">파일</span><span class="s1">: Step3. Keyword Priority Scoring.csv</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">📊</span><span class="s1"> KEI (Keyword Efficiency Index) </span><span class="s2">분석</span><span class="s1">&lt;/h3&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;p&gt;</span><span class="s1">검색량</span><span class="s5">(</span><span class="s1">수요</span><span class="s5">)</span><span class="s1">은</span><span class="s5"> </span><span class="s1">많지만</span><span class="s5">, </span><span class="s1">경쟁</span><span class="s5">(</span><span class="s1">공급</span><span class="s5">)</span><span class="s1">은</span><span class="s5"> </span><span class="s1">적은</span><span class="s5"> '</span><span class="s1">틈새</span><span class="s5"> </span><span class="s1">시장</span><span class="s5">'</span><span class="s1">을</span><span class="s5"> </span><span class="s1">공략하기</span><span class="s5"> </span><span class="s1">위한</span><span class="s5"> </span><span class="s1">지표</span><span class="s5"> </span><span class="s1">분석</span><span class="s5"> </span><span class="s1">단계입니다</span><span class="s5">.&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="highlight-box" style="background: #eff6ff; border-color: #3b82f6;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;strong&gt;</span><span class="s3">📌</span><span class="s1"> </span><span class="s2">핵심</span><span class="s1"> </span><span class="s2">공식</span><span class="s1">&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>KEI </span><span class="s2">지수가</span><span class="s1"> </span><span class="s2">높다</span><span class="s1"> = </span><span class="s2">찾은</span><span class="s1"> </span><span class="s2">사람은</span><span class="s1"> </span><span class="s2">많은데</span><span class="s1">, </span><span class="s2">제대로</span><span class="s1"> </span><span class="s2">된</span><span class="s1"> </span><span class="s2">정보는</span><span class="s1"> </span><span class="s2">부족하다</span><span class="s1"> (</span><span class="s2">기회</span><span class="s1">!)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;table class="custom-table"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;th width="30%"&gt;</span><span class="s2">구분</span><span class="s1">&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;th&gt;</span><span class="s2">전략</span><span class="s1"> </span><span class="s2">가이드</span><span class="s1">&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;td&gt;&lt;strong&gt;</span><span class="s3">🥇</span><span class="s1"> </span><span class="s2">황금</span><span class="s1"> </span><span class="s2">키워드</span><span class="s1">&lt;/strong&gt;&lt;br&gt;&lt;span style="font-size:0.8rem; color:#64748b;"&gt;(High Vol, Low Comp)&lt;/span&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">최우선</span><span class="s1"> </span><span class="s2">공략</span><span class="s1"> </span><span class="s2">대상</span><span class="s1">.&lt;/strong&gt; </span><span class="s2">경쟁사는</span><span class="s1"> </span><span class="s2">놓치고</span><span class="s1"> </span><span class="s2">있고</span><span class="s1"> </span><span class="s2">고객은</span><span class="s1"> </span><span class="s2">찾고</span><span class="s1"> </span><span class="s2">있는</span><span class="s1"> </span><span class="s2">영역입니다</span><span class="s1">.&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;em&gt;</span><span class="s2">예</span><span class="s1">: 2025 </span><span class="s2">미국</span><span class="s1"> </span><span class="s2">연말정산</span><span class="s1"> </span><span class="s2">환급금</span><span class="s1"> </span><span class="s2">조회</span><span class="s1">&lt;/em&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;td&gt;&lt;strong&gt;</span><span class="s3">🥈</span><span class="s1"> </span><span class="s2">롱테일</span><span class="s1"> </span><span class="s2">키워드</span><span class="s1">&lt;/strong&gt;&lt;br&gt;&lt;span style="font-size:0.8rem; color:#64748b;"&gt;(Low Vol, Low Comp)&lt;/span&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">전환율의</span><span class="s1"> </span><span class="s2">핵심</span><span class="s1">.&lt;/strong&gt; </span><span class="s2">검색량은</span><span class="s1"> </span><span class="s2">적지만</span><span class="s1"> </span><span class="s2">구체적인</span><span class="s1"> </span><span class="s2">니즈가</span><span class="s1"> </span><span class="s2">있어</span><span class="s1"> </span><span class="s2">구매</span><span class="s1"> </span><span class="s2">전환율이</span><span class="s1"> </span><span class="s2">높습니다</span><span class="s1">.&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;em&gt;</span><span class="s2">예</span><span class="s1">: 30</span><span class="s2">대</span><span class="s1"> </span><span class="s2">자영업자</span><span class="s1"> 401k </span><span class="s2">가입</span><span class="s1"> </span><span class="s2">혜택</span><span class="s1">&lt;/em&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;td&gt;&lt;strong&gt;</span><span class="s3">🥉</span><span class="s1"> </span><span class="s2">대형</span><span class="s1"> </span><span class="s2">키워드</span><span class="s1">&lt;/strong&gt;&lt;br&gt;&lt;span style="font-size:0.8rem; color:#64748b;"&gt;(High Vol, High Comp)&lt;/span&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">브랜딩</span><span class="s1"> </span><span class="s2">목적</span><span class="s1">.&lt;/strong&gt; </span><span class="s2">단기간</span><span class="s1"> </span><span class="s2">상위</span><span class="s1"> </span><span class="s2">노출은</span><span class="s1"> </span><span class="s2">어렵습니다</span><span class="s1">. </span><span class="s2">장기적</span><span class="s1"> </span><span class="s2">관점으로</span><span class="s1"> </span><span class="s2">접근합니다</span><span class="s1">.&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;em&gt;</span><span class="s2">예</span><span class="s1">: </span><span class="s2">미국</span><span class="s1"> </span><span class="s2">보험</span><span class="s1">, </span><span class="s2">대출</span><span class="s1">&lt;/em&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/table&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-2"&gt;Chapter 2&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[Step 4] </span><span class="s2">비즈니스</span><span class="s1"> </span><span class="s2">임팩트</span><span class="s1"> </span><span class="s2">점검</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;06&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="file-badge"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-file-csv"&gt;&lt;/i&gt; </span><span class="s2">참조</span><span class="s1"> </span><span class="s2">파일</span><span class="s1">: Step4. Priority Keyword.csv</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">🎯</span><span class="s1"> </span><span class="s2">최종</span><span class="s1"> </span><span class="s2">선정</span><span class="s1"> </span><span class="s2">체크리스트</span><span class="s1">&lt;/h3&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;p&gt;</span><span class="s1">데이터</span><span class="s5"> </span><span class="s1">점수가</span><span class="s5"> </span><span class="s1">아무리</span><span class="s5"> </span><span class="s1">좋아도</span><span class="s5">, </span><span class="s1">우리</span><span class="s5"> </span><span class="s1">비즈니스와</span><span class="s5"> </span><span class="s1">연결되지</span><span class="s5"> </span><span class="s1">않는다면</span><span class="s5"> </span><span class="s1">과감히</span><span class="s5"> </span><span class="s1">제외해야</span><span class="s5"> </span><span class="s1">합니다</span><span class="s5">.&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div style="display: flex; gap: 20px; flex-wrap: wrap;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div style="flex: 1; background: #F8FAFC; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h4 style="margin-top:0; color: #0F172A;"&gt;&lt;i class="fas fa-crosshairs" style="color:#10b981;"&gt;&lt;/i&gt; Product Fit&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="font-size:0.9rem;"&gt;</span><span class="s2">내부</span><span class="s1"> </span><span class="s2">데이터</span><span class="s1">(Amplitude </span><span class="s2">등</span><span class="s1">) </span><span class="s2">기준</span><span class="s1">, </span><span class="s2">실제</span><span class="s1"> </span><span class="s2">수익성이</span><span class="s1"> </span><span class="s2">높은</span><span class="s1"> </span><span class="s2">상품군과</span><span class="s1"> </span><span class="s2">연결되는가</span><span class="s1">?&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div style="flex: 1; background: #F8FAFC; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h4 style="margin-top:0; color: #0F172A;"&gt;&lt;i class="fas fa-calendar-alt" style="color:#3b82f6;"&gt;&lt;/i&gt; Seasonality&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="font-size:0.9rem;"&gt;</span><span class="s2">지금</span><span class="s1"> </span><span class="s2">시점에</span><span class="s1"> </span><span class="s2">고객들이</span><span class="s1"> </span><span class="s2">찾는</span><span class="s1"> </span><span class="s2">시의성</span><span class="s1"> </span><span class="s2">있는</span><span class="s1"> </span><span class="s2">주제인가</span><span class="s1">? (</span><span class="s2">예</span><span class="s1">: </span><span class="s2">세금</span><span class="s1"> </span><span class="s2">보고</span><span class="s1"> </span><span class="s2">시즌</span><span class="s1">)&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div style="flex: 1; background: #F8FAFC; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h4 style="margin-top:0; color: #0F172A;"&gt;&lt;i class="fas fa-pencil-alt" style="color:#f59e0b;"&gt;&lt;/i&gt; Authority&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="font-size:0.9rem;"&gt;</span><span class="s2">경쟁사보다</span><span class="s1"> </span><span class="s2">우리가</span><span class="s1"> </span><span class="s2">더</span><span class="s1"> '</span><span class="s2">깊고</span><span class="s1"> </span><span class="s2">전문적인</span><span class="s1">' </span><span class="s2">정보를</span><span class="s1"> </span><span class="s2">제공할</span><span class="s1"> </span><span class="s2">수</span><span class="s1"> </span><span class="s2">있는</span><span class="s1"> </span><span class="s2">영역인가</span><span class="s1">?&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3 style="margin-top: 40px;"&gt;</span><span class="s3">📝</span><span class="s1"> Output&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;</span><span class="s2">위</span><span class="s1"> </span><span class="s2">과정을</span><span class="s1"> </span><span class="s2">거쳐</span><span class="s1"> </span><span class="s2">최종적으로</span><span class="s1"> &lt;strong&gt;10~20</span><span class="s2">개의</span><span class="s1"> </span><span class="s2">핵심</span><span class="s1"> </span><span class="s2">키워드</span><span class="s1">(Priority Keyword)&lt;/strong&gt;</span><span class="s2">를</span><span class="s1"> </span><span class="s2">확정합니다</span><span class="s1">.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-3"&gt;Chapter 3&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[Step 5] </span><span class="s2">고객</span><span class="s1"> </span><span class="s2">여정</span><span class="s1"> </span><span class="s2">지도</span><span class="s1"> (Journey Map)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;07&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="file-badge"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-file-csv"&gt;&lt;/i&gt; </span><span class="s2">참조</span><span class="s1"> </span><span class="s2">파일</span><span class="s1">: Step5. Stragy_Keyword Journey.csv</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">🗺️</span><span class="s1"> CDJ (Customer Decision Journey) </span><span class="s2">설계</span><span class="s1">&lt;/h3&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;p&gt;</span><span class="s1">선별된</span><span class="s5"> </span><span class="s1">키워드를</span><span class="s5"> </span><span class="s1">고객의</span><span class="s5"> </span><span class="s1">의사결정</span><span class="s5"> </span><span class="s1">흐름에</span><span class="s5"> </span><span class="s1">맞춰</span><span class="s5"> </span><span class="s1">재배치합니다</span><span class="s5">. "</span><span class="s1">이</span><span class="s5"> </span><span class="s1">검색어는</span><span class="s5"> </span><span class="s1">어떤</span><span class="s5"> </span><span class="s1">마음으로</span><span class="s5"> </span><span class="s1">검색했을까</span><span class="s5">?"</span><span class="s1">를</span><span class="s5"> </span><span class="s1">고민합니다</span><span class="s5">.&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;table class="custom-table"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;thead&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;th style="background: #FFF7ED; color:#C2410C;"&gt;1. </span><span class="s2">탐색</span><span class="s1"> (Exploration)&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;th style="background: #FFEDD5; color:#9A3412;"&gt;2. </span><span class="s2">비교</span><span class="s1"> (Comparison)&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;th style="background: #FED7AA; color:#7C2D12;"&gt;3. </span><span class="s2">결정</span><span class="s1"> (Transaction)&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/thead&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;tbody&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;strong&gt;"</span><span class="s2">이게</span><span class="s1"> </span><span class="s2">뭐지</span><span class="s1">?" (What)&lt;/strong&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;strong&gt;"</span><span class="s2">뭐가</span><span class="s1"> </span><span class="s2">더</span><span class="s1"> </span><span class="s2">좋지</span><span class="s1">?" (Which)&lt;/strong&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;strong&gt;"</span><span class="s2">이걸로</span><span class="s1"> </span><span class="s2">할래</span><span class="s1">!" (Action)&lt;/strong&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s2">문제</span><span class="s1"> </span><span class="s2">인식</span><span class="s1"> </span><span class="s2">단계</span><span class="s1">&lt;br&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;em&gt;Key: Definition, Trend&lt;/em&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- </span><span class="s2">미국</span><span class="s1"> </span><span class="s2">연금</span><span class="s1"> </span><span class="s2">종류</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- 401k</span><span class="s2">란</span><span class="s1">?&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- </span><span class="s2">노후</span><span class="s1"> </span><span class="s2">자금</span><span class="s1"> </span><span class="s2">필요성</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s2">대안</span><span class="s1"> </span><span class="s2">평가</span><span class="s1"> </span><span class="s2">단계</span><span class="s1">&lt;br&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;em&gt;Key: VS, Rank, Review&lt;/em&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- IRA vs 401k </span><span class="s2">비교</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- </span><span class="s2">연금</span><span class="s1"> </span><span class="s2">수익률</span><span class="s1"> </span><span class="s2">순위</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- </span><span class="s2">자동차</span><span class="s1"> </span><span class="s2">보험료</span><span class="s1"> </span><span class="s2">계산기</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s2">구매</span><span class="s1"> </span><span class="s2">직전</span><span class="s1"> </span><span class="s2">단계</span><span class="s1">&lt;br&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;em&gt;Key: Apply, Cost, Contact&lt;/em&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- Loaning.ai </span><span class="s2">상담</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- </span><span class="s2">연금</span><span class="s1"> </span><span class="s2">계좌</span><span class="s1"> </span><span class="s2">개설</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>- </span><span class="s2">견적</span><span class="s1"> </span><span class="s2">요청하기</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/tbody&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/table&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-3"&gt;Chapter 3&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[Step 6] </span><span class="s2">콘텐츠</span><span class="s1"> </span><span class="s2">형식</span><span class="s1"> </span><span class="s2">매핑</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;08&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="file-badge"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-file-csv"&gt;&lt;/i&gt; </span><span class="s2">참조</span><span class="s1"> </span><span class="s2">파일</span><span class="s1">: Step6. Funnel Definition.csv</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">🎨</span><span class="s1"> </span><span class="s2">퍼널</span><span class="s1"> </span><span class="s2">단계별</span><span class="s1"> </span><span class="s2">최적</span><span class="s1"> </span><span class="s2">포맷</span><span class="s1"> </span><span class="s2">정의</span><span class="s1">&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;</span><span class="s2">키워드의</span><span class="s1"> </span><span class="s2">성격</span><span class="s1">(Intent)</span><span class="s2">에</span><span class="s1"> </span><span class="s2">따라</span><span class="s1"> </span><span class="s2">어떤</span><span class="s1"> </span><span class="s2">형식의</span><span class="s1"> </span><span class="s2">콘텐츠로</span><span class="s1"> </span><span class="s2">응대할지</span><span class="s1"> </span><span class="s2">결정합니다</span><span class="s1">.&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div style="display: flex; flex-direction: column; gap: 15px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div style="border-left: 4px solid #94a3b8; padding-left: 15px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h4 style="margin:0; color:#475569;"&gt;</span><span class="s3">🧊</span><span class="s1"> TOFU (</span><span class="s2">인지</span><span class="s1"> </span><span class="s2">단계</span><span class="s1">)&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="margin:5px 0; font-size:0.95rem;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">추천</span><span class="s1"> </span><span class="s2">포맷</span><span class="s1">:&lt;/strong&gt; </span><span class="s2">용어</span><span class="s1"> </span><span class="s2">설명</span><span class="s1"> </span><span class="s2">가이드</span><span class="s1">, </span><span class="s2">트렌드</span><span class="s1"> </span><span class="s2">리포트</span><span class="s1">, </span><span class="s2">기초</span><span class="s1"> </span><span class="s2">상식</span><span class="s1"> </span><span class="s2">블로그</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">목표</span><span class="s1">:&lt;/strong&gt; </span><span class="s2">유입량</span><span class="s1"> </span><span class="s2">확보</span><span class="s1"> </span><span class="s2">및</span><span class="s1"> </span><span class="s2">브랜드</span><span class="s1"> </span><span class="s2">인지</span><span class="s1"> (Traffic &amp; Awareness)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div style="border-left: 4px solid #3b82f6; padding-left: 15px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h4 style="margin:0; color:#2563EB;"&gt;</span><span class="s3">💧</span><span class="s1"> MOFU (</span><span class="s2">고려</span><span class="s1"> </span><span class="s2">단계</span><span class="s1">)&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="margin:5px 0; font-size:0.95rem;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">추천</span><span class="s1"> </span><span class="s2">포맷</span><span class="s1">:&lt;/strong&gt; </span><span class="s2">비교표</span><span class="s1">(Comparison Table), </span><span class="s2">계산기</span><span class="s1">(Calculator), </span><span class="s2">체크리스트</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">목표</span><span class="s1">:&lt;/strong&gt; </span><span class="s2">신뢰도</span><span class="s1"> </span><span class="s2">확보</span><span class="s1"> </span><span class="s2">및</span><span class="s1"> </span><span class="s2">솔루션</span><span class="s1"> </span><span class="s2">우위</span><span class="s1"> </span><span class="s2">증명</span><span class="s1"> (Trust &amp; Solution)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div style="border-left: 4px solid #ef4444; padding-left: 15px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h4 style="margin:0; color:#DC2626;"&gt;</span><span class="s3">🔥</span><span class="s1"> BOFU (</span><span class="s2">전환</span><span class="s1"> </span><span class="s2">단계</span><span class="s1">)&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p style="margin:5px 0; font-size:0.95rem;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">추천</span><span class="s1"> </span><span class="s2">포맷</span><span class="s1">:&lt;/strong&gt; </span><span class="s2">상품</span><span class="s1"> </span><span class="s2">상세</span><span class="s1"> </span><span class="s2">페이지</span><span class="s1">, </span><span class="s2">고객</span><span class="s1"> </span><span class="s2">성공</span><span class="s1"> </span><span class="s2">사례</span><span class="s1">(Case Study), </span><span class="s2">상담</span><span class="s1"> </span><span class="s2">신청</span><span class="s1"> </span><span class="s2">폼</span><span class="s1">&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;strong&gt;</span><span class="s2">목표</span><span class="s1">:&lt;/strong&gt; </span><span class="s2">최종</span><span class="s1"> </span><span class="s2">가입</span><span class="s1"> </span><span class="s2">및</span><span class="s1"> </span><span class="s2">리드</span><span class="s1"> </span><span class="s2">확보</span><span class="s1"> (Conversion)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-3"&gt;Chapter 3&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>[Final] SEO </span><span class="s2">클러스터</span><span class="s1"> </span><span class="s2">명세서</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;09&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="file-badge"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-file-csv"&gt;&lt;/i&gt; </span><span class="s2">참조</span><span class="s1"> </span><span class="s2">파일</span><span class="s1">: Step5. Stragy.csv (</span><span class="s2">종합</span><span class="s1">)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">📋</span><span class="s1"> </span><span class="s2">작업</span><span class="s1"> </span><span class="s2">지시서</span><span class="s1">(Content Brief) </span><span class="s2">작성</span><span class="s1">&lt;/h3&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;p&gt;</span><span class="s1">앞선</span><span class="s5"> </span><span class="s1">모든</span><span class="s5"> </span><span class="s1">과정을</span><span class="s5"> </span><span class="s1">종합하여</span><span class="s5">, </span><span class="s1">에디터와</span><span class="s5"> </span><span class="s1">마케터가</span><span class="s5"> </span><span class="s1">실행할</span><span class="s5"> </span><span class="s1">수</span><span class="s5"> </span><span class="s1">있는</span><span class="s5"> </span><span class="s1">최종</span><span class="s5"> </span><span class="s1">설계도를</span><span class="s5"> </span><span class="s1">완성합니다</span><span class="s5">.&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;table class="custom-table"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;thead&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;th width="30%"&gt;</span><span class="s2">항목</span><span class="s1"> (Column)&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;th&gt;</span><span class="s2">작성</span><span class="s1"> </span><span class="s2">예시</span><span class="s1"> (Example)&lt;/th&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/thead&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;tbody&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;strong&gt;Target Keyword&lt;/strong&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;code&gt;401k </span><span class="s2">연금</span><span class="s1"> </span><span class="s2">조회</span><span class="s1">&lt;/code&gt; (</span><span class="s2">가장</span><span class="s1"> </span><span class="s2">공략하고</span><span class="s1"> </span><span class="s2">싶은</span><span class="s1"> </span><span class="s2">단어</span><span class="s1">)&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;strong&gt;Funnel Stage&lt;/strong&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;MOFU (</span><span class="s2">고려</span><span class="s1"> </span><span class="s2">단계</span><span class="s1"> - </span><span class="s2">내</span><span class="s1"> </span><span class="s2">연금이</span><span class="s1"> </span><span class="s2">어디</span><span class="s1"> </span><span class="s2">있는지</span><span class="s1"> </span><span class="s2">찾고</span><span class="s1"> </span><span class="s2">싶음</span><span class="s1">)&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;strong&gt;Content Title&lt;/strong&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;"</span><span class="s2">잠자는</span><span class="s1"> </span><span class="s2">내</span><span class="s1"> 401k </span><span class="s2">찾기</span><span class="s1">: 3</span><span class="s2">분</span><span class="s1"> </span><span class="s2">만에</span><span class="s1"> </span><span class="s2">조회하고</span><span class="s1"> </span><span class="s2">이관하는</span><span class="s1"> </span><span class="s2">법</span><span class="s1">"&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;strong&gt;Key Question&lt;/strong&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;</span><span class="s2">고객의</span><span class="s1"> </span><span class="s2">핵심</span><span class="s1"> </span><span class="s2">질문</span><span class="s1">: &lt;em&gt;"</span><span class="s2">옛날</span><span class="s1"> </span><span class="s2">회사에서</span><span class="s1"> </span><span class="s2">든</span><span class="s1"> </span><span class="s2">연금</span><span class="s1">, </span><span class="s2">어떻게</span><span class="s1"> </span><span class="s2">확인하지</span><span class="s1">?"&lt;/em&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;strong&gt;Landing URL&lt;/strong&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td&gt;</span><span class="s2">콘텐츠</span><span class="s1"> </span><span class="s2">읽은</span><span class="s1"> </span><span class="s2">후</span><span class="s1"> </span><span class="s2">이동할</span><span class="s1"> </span><span class="s2">곳</span><span class="s1">: &lt;code&gt;/product/pension-finder&lt;/code&gt;&lt;/td&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/tbody&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/table&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tip-box"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-comment-dots"&gt;&lt;/i&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong&gt;Why This Matters:&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">                </span></span><span class="s1">명세서가</span><span class="s5"> </span><span class="s1">구체적일수록</span><span class="s5"> </span><span class="s1">콘텐츠의</span><span class="s5"> </span><span class="s1">퀄리티가</span><span class="s5"> </span><span class="s1">높아집니다</span><span class="s5">. </span><span class="s1">제작자</span><span class="s5">(Writer)</span><span class="s1">가</span><span class="s5"> '</span><span class="s1">누구에게</span><span class="s5">', '</span><span class="s1">왜</span><span class="s5">' </span><span class="s1">이</span><span class="s5"> </span><span class="s1">글을</span><span class="s5"> </span><span class="s1">쓰는지</span><span class="s5"> </span><span class="s1">명확히</span><span class="s5"> </span><span class="s1">이해해야</span><span class="s5"> </span><span class="s1">독자를</span><span class="s5"> </span><span class="s1">설득할</span><span class="s5"> </span><span class="s1">수</span><span class="s5"> </span><span class="s1">있습니다</span><span class="s5">.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="slide"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="slide-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slide-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="chapter-tag ch-4"&gt;Chapter 4&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span></span><span class="s2">가이드를</span><span class="s1"> </span><span class="s2">마치며</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="slide-num"&gt;10&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="highlight-box" style="background: #F3E8FF; border-color: #7E22CE;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h4&gt;</span><span class="s3">🚀</span><span class="s1"> Success Checkpoints&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;</span><span class="s2">콘텐츠</span><span class="s1"> </span><span class="s2">발행</span><span class="s1"> </span><span class="s2">전</span><span class="s1">, </span><span class="s2">마지막으로</span><span class="s1"> </span><span class="s2">스스로에게</span><span class="s1"> </span><span class="s2">질문해</span><span class="s1"> </span><span class="s2">봅니다</span><span class="s1">.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;ul style="font-size: 1.05rem; line-height: 2;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;i class="fas fa-check" style="color:#10b981; margin-right:10px;"&gt;&lt;/i&gt; </span><span class="s2">검색량</span><span class="s1">(Volume)</span><span class="s2">보다</span><span class="s1"> &lt;strong&gt;</span><span class="s2">고객</span><span class="s1"> </span><span class="s2">의도</span><span class="s1">(Intent)&lt;/strong&gt;</span><span class="s2">에</span><span class="s1"> </span><span class="s2">집중했는가</span><span class="s1">?&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;i class="fas fa-check" style="color:#10b981; margin-right:10px;"&gt;&lt;/i&gt; </span><span class="s2">우리</span><span class="s1"> </span><span class="s2">서비스로</span><span class="s1"> </span><span class="s2">자연스럽게</span><span class="s1"> </span><span class="s2">연결되는</span><span class="s1"> &lt;strong&gt;</span><span class="s2">연결</span><span class="s1"> </span><span class="s2">고리</span><span class="s1">(CTA)&lt;/strong&gt;</span><span class="s2">가</span><span class="s1"> </span><span class="s2">있는가</span><span class="s1">?&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;i class="fas fa-check" style="color:#10b981; margin-right:10px;"&gt;&lt;/i&gt; </span><span class="s2">경쟁사보다</span><span class="s1"> &lt;strong&gt;</span><span class="s2">더</span><span class="s1"> </span><span class="s2">깊고</span><span class="s1"> </span><span class="s2">유용한</span><span class="s1"> </span><span class="s2">정보</span><span class="s1">(Deep Dive)&lt;/strong&gt;</span><span class="s2">를</span><span class="s1"> </span><span class="s2">담았는가</span><span class="s1">?&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;hr style="border:0; border-top:1px solid #E2E8F0; margin: 40px 0;"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;</span><span class="s3">💬</span><span class="s1"> </span><span class="s2">자주</span><span class="s1"> </span><span class="s2">묻는</span><span class="s1"> </span><span class="s2">질문</span><span class="s1"> (FAQ)&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div style="background: #F8FAFC; padding: 20px; border-radius: 8px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p style="margin-bottom: 15px;"&gt;&lt;strong&gt;Q. </span><span class="s2">검색량이</span><span class="s1"> </span><span class="s2">월</span><span class="s1"> 100</span><span class="s2">건도</span><span class="s1"> </span><span class="s2">안</span><span class="s1"> </span><span class="s2">되는</span><span class="s1"> </span><span class="s2">키워드도</span><span class="s1"> </span><span class="s2">해야</span><span class="s1"> </span><span class="s2">하나요</span><span class="s1">?&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">            </span>A. </span><span class="s1">네</span><span class="s5">, </span><span class="s1">전환율이</span><span class="s5"> </span><span class="s1">높다면</span><span class="s5"> </span><span class="s1">필수입니다</span><span class="s5">. </span><span class="s1">롱테일</span><span class="s5"> </span><span class="s1">키워드가</span><span class="s5"> </span><span class="s1">모여</span><span class="s5"> </span><span class="s1">거대한</span><span class="s5"> </span><span class="s1">트래픽을</span><span class="s5"> </span><span class="s1">만듭니다</span><span class="s5">.&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p style="margin: 0;"&gt;&lt;strong&gt;Q. </span><span class="s2">데이터</span><span class="s1"> </span><span class="s2">업데이트는</span><span class="s1"> </span><span class="s2">언제</span><span class="s1"> </span><span class="s2">하나요</span><span class="s1">?&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>A. </span><span class="s2">분기</span><span class="s1"> 1</span><span class="s2">회</span><span class="s1">(3</span><span class="s2">개월</span><span class="s1">) </span><span class="s2">재검토를</span><span class="s1"> </span><span class="s2">권장하며</span><span class="s1">, </span><span class="s2">세금</span><span class="s1"> </span><span class="s2">보고</span><span class="s1"> </span><span class="s2">등</span><span class="s1"> </span><span class="s2">이슈</span><span class="s1"> </span><span class="s2">시즌에는</span><span class="s1"> </span><span class="s2">즉시</span><span class="s1"> </span><span class="s2">반영합니다</span><span class="s1">.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div style="margin-top: 50px; text-align: center; color: #64748b; font-size: 0.9rem;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Loaning.ai Content Marketing Team&lt;/strong&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Data-Driven SEO Strategy Guide Ver 1.0</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
 </body>
 </html>
